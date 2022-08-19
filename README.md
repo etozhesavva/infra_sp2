@@ -26,7 +26,7 @@
 Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone https://github.com/evencatt/infra_sp2.git
+git clone https://github.com/etozhesavva/infra_sp2.git
 ```
 
 ```
