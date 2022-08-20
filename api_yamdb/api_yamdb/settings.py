@@ -5,7 +5,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#Автотесты ругаются что тут сикрет ки пустой не должен быть
+# Автотесты ругаются что тут сикрет ки пустой не должен быть
 SECRET_KEY = '/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
