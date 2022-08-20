@@ -32,7 +32,19 @@ git clone https://github.com/etozhesavva/infra_sp2.git
 ```
 cd infra
 ```
+Создать .env файл внутри директории infra (на одном уровне с docker-compose.yaml)
+Пример .env файла:
+```
 
+SECRET_KEY = 'p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs'
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=123
+DB_HOST=db
+DB_PORT=5432
+
+```
 Развернуть докер контэйнеры:
 ```
 sudo docker-compose up
@@ -43,7 +55,36 @@ sudo docker-compose up
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py collectstatic --no-input
+
+## Заполнение базы начальными данными
+
+Скопируем fixtures.json в контейнер infra_sp2_web_1:
+
 ```
+sudo docker cp /infra_sp2/fixtures.json <ID infra_sp2_web_1>:/code/ 
+```
+
+Заходим в контейнер:
+
+```
+docker exec -it <CONTAINER ID> bash
+```
+где <CONTAINER ID> - ID "infra_sp2_web_1"
+
+
+Выполняем команды:
+
+```
+python3 manage.py shell  
+# выполнить в открывшемся терминале:
+>>> from django.contrib.contenttypes.models import ContentType
+>>> ContentType.objects.all().delete()
+>>> quit()
+python manage.py loaddata fixtures.json 
+```
+
+Готово.
+
 
 ### Примеры использования api:
 Получение произведений:
@@ -66,3 +107,7 @@ POST /api/v1/titles/
     "category": "films"
 }
 ```
+
+## Автор
+
+* **Romanov Savva** - [etozhesavva](https://github.com/etozhesavva)
