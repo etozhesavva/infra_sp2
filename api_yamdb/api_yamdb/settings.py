@@ -4,6 +4,10 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# SECURITY WARNING: keep the secret key used in production secret!
+#Автотесты ругаются что тут сикрет ки пустой не должен быть
+SECRET_KEY = '/'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -131,6 +135,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
